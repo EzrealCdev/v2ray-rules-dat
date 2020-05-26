@@ -1,5 +1,8 @@
 taobao.com
+bilibili.com
 sunborngame.com
 ezrealc.tech
 aliyun.com
+bing.com
+tieba.baidu.com
 tongji.baidu.com
