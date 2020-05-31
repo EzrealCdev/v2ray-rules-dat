@@ -128,7 +128,7 @@
 下面为自用 V2Ray 客户端完整配置，注意事项：
 
 - 由于下面客户端配置使用了 DoH DNS 功能，所以必须使用 v4.22.0 或更新版本的 [V2Ray](https://github.com/v2ray/v2ray-core/releases)
-- 下面客户端配置使 V2Ray 在本机开启 SOCKS 代理（监听 1080 端口）和 HTTP 代理（监听 2080 端口）
+- 下面客户端配置使 V2Ray 在本机开启 SOCKS 代理（监听 1088 端口）和 HTTP 代理（监听 1089 端口），局域网设备亦可通过此端口连接
 - BT 流量统统直连（实测依然会有部分 BT 流量走代理，尚不清楚是不是 V2Ray 的 bug。如果服务商禁止 BT 下载的话，请不要为下载软件设置代理）
 - 最后，不命中任何路由规则的请求和流量，统统走代理
 - `outbounds` 里的第一个大括号内的配置，即为 V2Ray 代理服务的配置。请根据自身需求进行修改，并参照 V2Ray 官网配置说明中的 [配置文件 > 文件格式 > OutboundObject](https://www.v2fly.org/chapter_02/01_overview.html#outboundobject) 部分进行补全
@@ -166,11 +166,11 @@
   "inbounds": [
     {
       "protocol": "socks",
-      "listen": "127.0.0.1",
-      "port": 1080,
+      "listen": "0.0.0.0",
+      "port": 1088,
       "tag": "Socks-In",
       "settings": {
-        "ip": "127.0.0.1",
+        "ip": null,
         "udp": true,
         "auth": "noauth"
       },
@@ -181,8 +181,8 @@
     },
     {
       "protocol": "http",
-      "listen": "127.0.0.1",
-      "port": 2080,
+      "listen": "0.0.0.0",
+      "port": 1089,
       "tag": "Http-In",
       "sniffing": {
         "enabled": true,
@@ -241,9 +241,9 @@
       },
       {
         "type": "field",
-        "outboundTag": "Reject",
+        "outboundTag": "Direct",
         "domain": [
-          "geosite:category-ads-all"
+          "geosite:cn"
         ]
       },
       {
@@ -255,9 +255,9 @@
       },
       {
         "type": "field",
-        "outboundTag": "Direct",
+        "outboundTag": "Reject",
         "domain": [
-          "geosite:cn"
+          "geosite:category-ads-all"
         ]
       },
       {
