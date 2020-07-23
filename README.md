@@ -2,7 +2,7 @@
 
 # 简介 ![GitHub All Releases](https://img.shields.io/github/downloads/EzrealCdev/v2ray-rules-dat/total)
 
-**V2Ray** 规则文件加强版，可代替 V2Ray 官方 `geoip.dat` 和 `geosite.dat` 规则文件。利用 GitHub Actions 北京时间每天早上 6 点自动构建，保证规则最新。
+**V2Ray** 路由规则文件加强版，可代替 V2Ray 官方 `geoip.dat` 和 `geosite.dat` 规则文件。利用 GitHub Actions 北京时间每天早上 6 点自动构建，保证规则最新。
 
 ## 说明
 
@@ -17,18 +17,18 @@
 
 ### geosite.dat
 
-- 通过仓库 [@v2ray/domain-list-community](https://github.com/v2ray/domain-list-community) 生成
+- 通过仓库 [@v2fly/domain-list-community](https://github.com/v2fly/domain-list-community) 生成
 - **加入大量中国大陆域名、Apple 域名和 Google 域名**：
   - [@felixonmars/dnsmasq-china-list/accelerated-domains.china.conf](https://github.com/felixonmars/dnsmasq-china-list/blob/master/accelerated-domains.china.conf) 加入到 `geosite:cn` 类别中
   - [@felixonmars/dnsmasq-china-list/apple.china.conf](https://github.com/felixonmars/dnsmasq-china-list/blob/master/apple.china.conf) 加入到 `geosite:geolocation-!cn` 类别中（如希望本文件中的 Apple 域名直连，请参考下面 [geosite 的 Routing 配置方式](https://github.com/Loyalsoldier/v2ray-rules-dat#geositedat-1)）
   - [@felixonmars/dnsmasq-china-list/google.china.conf](https://github.com/felixonmars/dnsmasq-china-list/blob/master/google.china.conf) 加入到 `geosite:geolocation-!cn` 类别中（如希望本文件中的 Google 域名直连，请参考下面 [geosite 的 Routing 配置方式](https://github.com/Loyalsoldier/v2ray-rules-dat#geositedat-1)）
 - **加入最新 GFWList 域名**：通过仓库 [@cokebar/gfwlist2dnsmasq](https://github.com/cokebar/gfwlist2dnsmasq) 生成并加入到 `geosite:geolocation-!cn` 类别中
 - **加入附加 GFWList 域名**：通过仓库 [@pexcn/gfwlist-extras](https://github.com/pexcn/gfwlist-extras) 获取并加入到 `geosite:geolocation-!cn` 类别中
-- **加入 Greatfire Analyzer 检测到的屏蔽域名**：通过仓库 [@wongsyrone/domain-block-list](https://github.com/wongsyrone/domain-block-list) 和 [@Loyalsoldier/cn-blocked-domain](https://github.com/Loyalsoldier/cn-blocked-domain) 获取 [Greatfire Analyzer](https://zh.greatfire.org/analyzer) 检测到的屏蔽域名，并加入到 `geosite:geolocation-!cn` 类别中
+- **加入 Greatfire Analyzer 检测到的屏蔽域名**：通过仓库 [@Loyalsoldier/cn-blocked-domain](https://github.com/Loyalsoldier/cn-blocked-domain) 获取 [Greatfire Analyzer](https://zh.greatfire.org/analyzer) 检测到的屏蔽域名，并加入到 `geosite:geolocation-!cn` 类别中
 - **加入 AdAway 广告域名**：通过仓库 [@AdAway/adaway.github.io/hosts.txt](https://github.com/AdAway/adaway.github.io/blob/master/hosts.txt) 获取并加入到 `geosite:category-ads-all` 类别中
-- **加入更多代理域名和广告域名**：通过仓库 [@ConnersHua/Profiles](https://github.com/ConnersHua/Profiles/tree/master)、[@GeQ1an/Rules](https://github.com/GeQ1an/Rules/tree/master/QuantumultX) 和 [@lhie1/Rules](https://github.com/lhie1/Rules/tree/master) 获取更多代理域名、广告域名，并分别加入到 `geosite:geolocation-!cn` 和 `geosite:category-ads-all` 类别中
-- **可添加自定义直连、代理和广告域名**：由于上游域名列表更新缓慢或缺失某些域名，所以引入**需要添加的域名**列表。[`hidden 分支`](https://github.com/EzrealCdev/v2ray-rules-dat/tree/hidden)里的三个文件 `direct.txt`、`proxy.txt` 和 `reject.txt`，分别存放自定义的需要添加的直连、代理、广告域名，最终分别加入到 `geosite:cn`、`geosite:geolocation-!cn` 和 `geosite:category-ads-all` 类别中
-- **可移除自定义直连、代理和广告域名**：由于上游域名列表存在需要被移除的域名，所以引入**需要移除的域名**列表。[`hidden 分支`](https://github.com/EzrealCdev/v2ray-rules-dat/tree/hidden)里的三个文件 `direct-need-to-remove.txt`、`proxy-need-to-remove.txt` 和 `reject-need-to-remove.txt`，分别存放自定义的需要从 `direct-list`（直连域名列表）、`proxy-list`（代理域名列表）和 `reject-list`（广告域名列表） 移除的域名
+- **加入更多代理域名和广告域名**：通过仓库 [@GeQ1an/Rules](https://github.com/GeQ1an/Rules/tree/master/QuantumultX) 和 [@lhie1/Rules](https://github.com/lhie1/Rules/tree/master) 获取更多代理域名、广告域名，并分别加入到 `geosite:geolocation-!cn` 和 `geosite:category-ads-all` 类别中
+- **可添加自定义直连、代理和广告域名**：由于上游域名列表更新缓慢或缺失某些域名，所以引入**需要添加的域名**列表。[`hidden 分支`](https://github.com/Loyalsoldier/v2ray-rules-dat/tree/hidden)里的三个文件 `direct.txt`、`proxy.txt` 和 `reject.txt`，分别存放自定义的需要添加的直连、代理、广告域名，最终分别加入到 `geosite:cn`、`geosite:geolocation-!cn` 和 `geosite:category-ads-all` 类别中
+- **可移除自定义直连、代理和广告域名**：由于上游域名列表存在需要被移除的域名，所以引入**需要移除的域名**列表。[`hidden 分支`](https://github.com/Loyalsoldier/v2ray-rules-dat/tree/hidden)里的三个文件 `direct-need-to-remove.txt`、`proxy-need-to-remove.txt` 和 `reject-need-to-remove.txt`，分别存放自定义的需要从 `direct-list`（直连域名列表）、`proxy-list`（代理域名列表）和 `reject-list`（广告域名列表） 移除的域名
 
 ## 规则文件下载及使用方式
 
@@ -36,6 +36,9 @@
 
 - **geoip.dat**：[https://github.com/EzrealCdev/v2ray-rules-dat/raw/release/geoip.dat](https://github.com/EzrealCdev/v2ray-rules-dat/raw/release/geoip.dat)
 - **geosite.dat**：[https://github.com/EzrealCdev/v2ray-rules-dat/raw/release/geosite.dat](https://github.com/EzrealCdev/v2ray-rules-dat/raw/release/geosite.dat)
+- **直连域名列表 direct-list.txt**：[https://github.com/EzrealCdev/v2ray-rules-dat/raw/release/direct-list.txt](https://github.com/EzrealCdev/v2ray-rules-dat/raw/release/direct-list.txt)
+- **代理域名列表 proxy-list.txt**：[https://github.com/EzrealCdev/v2ray-rules-dat/raw/release/proxy-list.txt](https://github.com/EzrealCdev/v2ray-rules-dat/raw/release/proxy-list.txt)
+- **广告域名列表 reject-list.txt**：[https://github.com/EzrealCdev/v2ray-rules-dat/raw/release/reject-list.txt](https://github.com/EzrealCdev/v2ray-rules-dat/raw/release/reject-list.txt)
 
 **使用方式**：
 
@@ -93,7 +96,7 @@ scoop install v2ray-rules-dat
 
 ### geosite.dat
 
-跟 V2Ray 官方 `geosite.dat` 配置方式相同。`geosite:apple-cn` 和 `geosite:google-cn` 为本项目特有的两个类别，分别包含 [@felixonmars/dnsmasq-china-list/apple.china.conf](https://github.com/felixonmars/dnsmasq-china-list/blob/master/apple.china.conf) 和 [@felixonmars/dnsmasq-china-list/google.china.conf](https://github.com/felixonmars/dnsmasq-china-list/blob/master/google.china.conf) 文件里的域名，供希望 Apple 和 Google 域名直连（不走代理）的用户使用，配置参考下面 👇👇👇
+跟 V2Ray 官方 `geosite.dat` 配置方式相同。`geosite:apple-cn` 和 `geosite:google-cn` 为本项目特有的两个类别，分别包含 [@felixonmars/dnsmasq-china-list/apple.china.conf](https://github.com/felixonmars/dnsmasq-china-list/blob/master/apple.china.conf) 和 [@felixonmars/dnsmasq-china-list/google.china.conf](https://github.com/felixonmars/dnsmasq-china-list/blob/master/google.china.conf) 文件里的域名，供希望 Apple 和 Google 域名直连（不走代理）的用户使用。在 Routing 配置中，类别越靠前（上），优先级越高，所以 `geosite:apple-cn` 和 `geosite:google-cn` 要放置在 `geosite:geolocation-!cn` 前（上）面。配置参考下面 👇👇👇
 
 **Routing 配置方式**：
 
@@ -113,7 +116,7 @@ scoop install v2ray-rules-dat
       "domain": [
         "geosite:apple-cn",
         "geosite:google-cn",
-        "geosite:jsdelivr",
+        "geosite:tld-cn",
         "domain:icloud.com",
         "domain:icloud-content.com"
       ]
@@ -142,21 +145,21 @@ scoop install v2ray-rules-dat
 "dns": {
   "servers": [
     {
-      "address": "1.1.1.1",
-      "port": 53,
-      "domains": [
-        "geosite:geolocation-!cn"
-      ]
-    },
-    {
       "address": "114.114.114.114",
       "port": 53,
       "domains": [
         "geosite:cn"
       ]
     },
-    "8.8.8.8",
-    "223.5.5.5"
+    {
+      "address": "1.1.1.1",
+      "port": 53,
+      "domains": [
+        "geosite:geolocation-!cn"
+      ]
+    },
+    "223.5.5.5",
+    "8.8.8.8"
   ]
 }
 ```
@@ -230,10 +233,10 @@ scoop install v2ray-rules-dat
   ],
   "outbounds": [
     {
-      //下面这行，协议名称为socks、shadowsocks或vmess等（记得删除这行文字说明）
-      "protocol": "协议名称",
+      //下面这行，协议类别要改为socks、shadowsocks或vmess等（记得删除本行文字说明）
+      "protocol": "协议类别",
       "settings": {},
-      //下面这行，必须为Proxy，对应Routing里的outboundTag（记得删除这行文字说明）
+      //下面这行，tag的值对应Routing里的outboundTag，这里为Proxy（记得删除本行文字说明）
       "tag": "Proxy",
       "streamSettings": {},
       "mux": {}
@@ -260,7 +263,7 @@ scoop install v2ray-rules-dat
     }
   ],
   "routing": {
-    "domainStrategy": "IPIfNonMatch",
+    "domainStrategy": "AsIs",
     "rules": [
       {
         "type": "field",
@@ -282,6 +285,13 @@ scoop install v2ray-rules-dat
         "outboundTag": "Direct",
         "domain": [
           "geosite:cn"
+        ]
+      },
+      {
+        "type": "field",
+        "outboundTag": "Direct",
+        "domain": [
+          "geosite:tld-cn"
         ]
       },
       {
@@ -341,20 +351,19 @@ scoop install v2ray-rules-dat
 > This product includes GeoLite2 data created by MaxMind, available from [https://www.maxmind.com](https://www.maxmind.com).
 
 - [MaxMind GeoLite2 Free IP Database](https://dev.maxmind.com/geoip/geoip2/geolite2/)
-- [@kidonng/scoop-v2ray](https://github.com/kidonng/scoop-v2ray)
 - [@v2ray/geoip](https://github.com/v2ray/geoip)
-- [@v2ray/domain-list-community](https://github.com/v2ray/domain-list-community)
+- [@Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip)
+- [@v2fly/domain-list-community](https://github.com/v2fly/domain-list-community)
 - [@felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list)
 - [@gfwlist/gfwlist](https://github.com/gfwlist/gfwlist)
 - [@pexcn/gfwlist-extras](https://github.com/pexcn/gfwlist-extras)
 - [@cokebar/gfwlist2dnsmasq](https://github.com/cokebar/gfwlist2dnsmasq)
 - [@Loyalsoldier/cn-blocked-domain](https://github.com/Loyalsoldier/cn-blocked-domain)
-- [@wongsyrone/domain-block-list](https://github.com/wongsyrone/domain-block-list)
-- [@ConnersHua/Profiles](https://github.com/ConnersHua/Profiles/tree/master)
 - [@GeQ1an/Rules](https://github.com/GeQ1an/Rules/tree/master/QuantumultX)
 - [@lhie1/Rules](https://github.com/lhie1/Rules/tree/master)
 - [@pexcn/daily/chnroute.txt](https://github.com/pexcn/daily/blob/gh-pages/chnroute/chnroute.txt)
 - [@AdAway/adaway.github.io/hosts.txt](https://github.com/AdAway/adaway.github.io/blob/master/hosts.txt)
+- [@kidonng/scoop-v2ray](https://github.com/kidonng/scoop-v2ray)
 
 ## 项目 Star 数增长趋势
 
