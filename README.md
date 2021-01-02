@@ -1,11 +1,10 @@
 # 简介
 
-[**V2Ray**](https://github.com/v2fly/v2ray-core) 路由规则文件加强版，可代替 V2Ray 官方 `geoip.dat` 和 `geosite.dat` 规则文件，兼容 [**Trojan-Go**](https://github.com/p4gefau1t/trojan-go)。利用 GitHub Actions 北京时间每天早上 6 点自动构建，保证规则最新。
+[**V2Ray**](https://github.com/v2fly/v2ray-core) 路由规则文件加强版，可代替 V2Ray 官方 `geoip.dat` 和 `geosite.dat` 规则文件，兼容 [Trojan-Go](https://github.com/p4gefau1t/trojan-go) 和 [Shadowsocks-windows](https://github.com/shadowsocks/shadowsocks-windows)。利用 GitHub Actions 北京时间每天早上 6 点自动构建，保证规则最新。
 
 ## 说明
 
-- 本项目适用于命令行版本 V2Ray 客户端。第三方桌面图形界面版（GUI）V2Ray 客户端一般都有路由规则图形化配置界面，但一般也都支持使用自定义 V2Ray JSON 配置和 dat 规则文件，请自行研究并修改配置。第三方移动设备版 V2Ray 客户端情况比较复杂，大概率不支持使用自定义 V2Ray JSON 配置和 dat 规则文件，请知悉。
-- [Fork](https://github.com/Loyalsoldier/v2ray-rules-dat/fork) 本项目后，需要在自己仓库的 **[Settings]** 选项卡的 **[Secrets]** 页面中添加一个名为 **MAXMIND_GEOLITE2_LICENSE** 的 secret，否则 GitHub Actions 会运行失败。这个 secret 的值为 MAXMIND 账号的 LICENSE KEY，需要[**注册 MAXMIND 账号**](https://www.maxmind.com/en/geolite2/signup)后，在[**个人账号管理页面**](https://www.maxmind.com/en/account)左侧边栏的 **[Services]** 项下的 **[My License Key]** 里生成。
+[Fork](https://github.com/Loyalsoldier/v2ray-rules-dat/fork) 本项目后，需要在自己仓库的 **[Settings]** 选项卡的 **[Secrets]** 页面中添加一个名为 **MAXMIND_GEOLITE2_LICENSE** 的 secret，否则 GitHub Actions 会运行失败。这个 secret 的值为 MAXMIND 账号的 LICENSE KEY，需要[**注册 MAXMIND 账号**](https://www.maxmind.com/en/geolite2/signup)后，在[**个人账号管理页面**](https://www.maxmind.com/en/account)左侧边栏的 **[Services]** 项下的 **[My License Key]** 里生成。
 
 ## 规则文件生成方式
 
@@ -22,8 +21,8 @@
   - [@felixonmars/dnsmasq-china-list/apple.china.conf](https://github.com/felixonmars/dnsmasq-china-list/blob/master/apple.china.conf) 加入到 `geosite:geolocation-!cn` 类别中（如希望本文件中的 Apple 域名直连，请参考下面 [geosite 的 Routing 配置方式](https://github.com/Loyalsoldier/v2ray-rules-dat#geositedat-1)）
   - [@felixonmars/dnsmasq-china-list/google.china.conf](https://github.com/felixonmars/dnsmasq-china-list/blob/master/google.china.conf) 加入到 `geosite:geolocation-!cn` 类别中（如希望本文件中的 Google 域名直连，请参考下面 [geosite 的 Routing 配置方式](https://github.com/Loyalsoldier/v2ray-rules-dat#geositedat-1)）
 - **加入 GFWList 域名**：
-  - 通过仓库 [@cokebar/gfwlist2dnsmasq](https://github.com/cokebar/gfwlist2dnsmasq) 和 [@pexcn/gfwlist-extras](https://github.com/pexcn/gfwlist-extras) 生成
-  - 加入到 `geosite:gfw` 类别中，供希望使用 GFWList 的用户使用
+  - 基于 [@gfwlist/gfwlist](https://github.com/gfwlist/gfwlist) 数据，通过仓库 [@cokebar/gfwlist2dnsmasq](https://github.com/cokebar/gfwlist2dnsmasq) 和 [@pexcn/gfwlist-extras](https://github.com/pexcn/gfwlist-extras) 生成
+  - 加入到 `geosite:gfw` 类别中，供习惯于 PAC 模式并希望使用 [GFWList](https://github.com/gfwlist/gfwlist) 的用户使用
   - 同时加入到 `geosite:geolocation-!cn` 类别中
 - **加入 Greatfire Analyzer 检测到的屏蔽域名**：
   - 通过仓库 [@Loyalsoldier/cn-blocked-domain](https://github.com/Loyalsoldier/cn-blocked-domain) 获取 [Greatfire Analyzer](https://zh.greatfire.org/analyzer) 检测到的在中国大陆被屏蔽的域名
@@ -193,6 +192,57 @@ scoop install v2ray-rules-dat
         "geosite:tld-!cn",
         "geosite:gfw",
         "geosite:greatfire"
+      ]
+    },
+    {
+      "type": "field",
+      "outboundTag": "Proxy",
+      "ip": [
+        "149.154.167.99/32",
+        "149.154.175.10/32",
+        "149.154.167.40/32",
+        "149.154.167.42/32",
+        "149.154.175.117/32",
+        "149.154.175.50/32",
+        "149.154.167.50/32",
+        "149.154.167.51/32",
+        "149.154.175.100/32",
+        "149.154.167.91/32",
+        "149.154.167.90/32",
+        "149.154.165.120/32",
+        "149.154.166.120/32",
+        "149.154.164.250/32",
+        "149.154.167.117/32",
+        "149.154.167.118/32",
+        "149.154.167.192/27",
+        "149.154.164.8/29",
+        "91.108.8.0/27",
+        "91.108.12.0/27",
+        "91.108.16.0/27",
+        "91.108.56.0/24",
+        "91.108.4.0/24",
+        "149.154.160.0/22",
+        "149.154.164.0/22",
+        "149.154.168.0/22",
+        "149.154.172.0/22",
+        "91.108.56.0/22",
+        "91.108.4.0/22",
+        "91.108.8.0/22",
+        "91.108.16.0/22",
+        "91.108.12.0/22",
+        "149.154.160.0/20",
+        "2001:b28:f23d:f001::e/128",
+        "2001:67c:4e8:f002::e/128",
+        "2001:b28:f23d:f003::e/128",
+        "2001:b28:f23d:f001::a/128",
+        "2001:67c:4e8:f002::a/128",
+        "2001:b28:f23d:f003::a/128",
+        "2001:67c:4e8:f004::a/128",
+        "2001:b28:f23f:f005::a/128",
+        "2001:67c:4e8:fa60::/64",
+        "2001:b28:f23d::/48",
+        "2001:b28:f23f::/48",
+        "2001:67c:4e8::/48"
       ]
     },
     {
