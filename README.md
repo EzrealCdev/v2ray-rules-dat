@@ -8,6 +8,7 @@
 
 - 通过仓库 [@Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip) 生成
 - 其中全球 IP 地址（IPv4 和 IPv6）来源于 [MaxMind GeoLite2](https://dev.maxmind.com/geoip/geoip2/geolite2/)，`CN`（中国大陆）类别下的 IPv4 地址来源于 [ipip.net](https://github.com/17mon/china_ip_list)
+- 新增 `geoip:telegram` 类别，方便黑名单模式用户使用
 
 ### geosite.dat
 
@@ -83,18 +84,10 @@
 
 **使用方式**：
 
-Windows 用户可通过 [Scoop](https://scoop.sh) 来安装：
-
-```shell
-scoop bucket add sushi https://github.com/kidonng/sushi
-scoop install v2ray-rules-dat
-```
-
-非 Windows 用户：
-
-1. 点击上面下载地址，下载 `geoip.dat` 和 `geosite.dat`
-2. 把下载下来的 `geoip.dat` 和 `geosite.dat` 文件放入到 V2Ray 的规则文件目录，替换掉原来的 `geoip.dat` 和 `geosite.dat`
-3. 修改 V2Ray 配置文件，配置参考下面 👇👇👇
+1. 安装适用于自己操作系统的客户端（推荐 [V2Ray 客户端](https://www.v2fly.org/awesome/tools.html#%E7%AC%AC%E4%B8%89%E6%96%B9%E5%9B%BE%E5%BD%A2%E5%AE%A2%E6%88%B7%E7%AB%AF)）
+2. 下载本项目的 `geoip.dat` 和 `geosite.dat`
+3. 把下载下来的 `geoip.dat` 和 `geosite.dat` 放入到客户端的规则文件目录，替换掉原来的 `geoip.dat` 和 `geosite.dat`
+4. 如果使用的是 V2Ray 客户端，配置可参考下面 👇👇👇
 
 ## 参考配置
 
@@ -128,7 +121,8 @@ scoop install v2ray-rules-dat
         "8.8.8.8/32",
         "8.8.4.4/32",
         "geoip:us",
-        "geoip:ca"
+        "geoip:ca",
+        "geoip:telegram"
       ]
     }
   ]
@@ -221,91 +215,7 @@ scoop install v2ray-rules-dat
       "type": "field",
       "outboundTag": "Proxy",
       "ip": [
-        "149.154.167.99/32",
-        "149.154.175.10/32",
-        "149.154.167.40/32",
-        "149.154.167.42/32",
-        "149.154.175.117/32",
-        "149.154.175.50/32",
-        "149.154.167.50/32",
-        "149.154.167.51/32",
-        "149.154.175.100/32",
-        "149.154.167.91/32",
-        "149.154.167.90/32",
-        "149.154.165.120/32",
-        "149.154.166.120/32",
-        "149.154.164.250/32",
-        "149.154.167.117/32",
-        "149.154.167.118/32",
-        "149.154.167.192/27",
-        "149.154.164.8/29",
-        "91.108.8.0/27",
-        "91.108.12.0/27",
-        "91.108.16.0/27",
-        "91.108.56.0/24",
-        "91.108.4.0/24",
-        "149.154.160.0/22",
-        "149.154.164.0/22",
-        "149.154.168.0/22",
-        "149.154.172.0/22",
-        "91.108.56.0/22",
-        "91.108.4.0/22",
-        "91.108.8.0/22",
-        "91.108.16.0/22",
-        "91.108.12.0/22",
-        "149.154.160.0/20",
-        "2001:b28:f23d:f001::e/128",
-        "2001:67c:4e8:f002::e/128",
-        "2001:b28:f23d:f003::e/128",
-        "2001:b28:f23d:f001::a/128",
-        "2001:67c:4e8:f002::a/128",
-        "2001:b28:f23d:f003::a/128",
-        "2001:67c:4e8:f004::a/128",
-        "2001:b28:f23f:f005::a/128",
-        "2001:67c:4e8:fa60::/64",
-        "2001:b28:f23d::/48",
-        "2001:b28:f23f::/48",
-        "2001:67c:4e8::/48"
-      ]
-    },
-    {
-      "type": "field",
-      "outboundTag": "Proxy",
-      "ip": [
-        "geoip:ae",
-        "geoip:au",
-        "geoip:br",
-        "geoip:ca",
-        "geoip:de",
-        "geoip:dk",
-        "geoip:es",
-        "geoip:fi",
-        "geoip:fr",
-        "geoip:gb",
-        "geoip:gr",
-        "geoip:hk",
-        "geoip:id",
-        "geoip:il",
-        "geoip:in",
-        "geoip:iq",
-        "geoip:ir",
-        "geoip:it",
-        "geoip:jp",
-        "geoip:kr",
-        "geoip:mo",
-        "geoip:my",
-        "geoip:nl",
-        "geoip:no",
-        "geoip:nz",
-        "geoip:ph",
-        "geoip:ru",
-        "geoip:sa",
-        "geoip:sg",
-        "geoip:th",
-        "geoip:tr",
-        "geoip:tw",
-        "geoip:us",
-        "geoip:vn"
+        "geoip:telegram"
       ]
     },
     {
@@ -350,7 +260,7 @@ scoop install v2ray-rules-dat
 - 下面客户端配置使 V2Ray 在本机开启 SOCKS 代理（监听 1080 端口）和 HTTP 代理（监听 2080 端口），允许局域网内其他设备连接并使用代理
 - BT 流量统统直连（实测依然会有部分 BT 流量走代理，尚不清楚是不是 V2Ray 的 bug。如果服务商禁止 BT 下载的话，请不要为下载软件设置代理）
 - 最后，不命中任何路由规则的请求和流量，统统走代理
-- `outbounds` 里的第一个大括号内的配置，即为 V2Ray 代理服务的配置。请根据自身需求进行修改，并参照 V2Ray 官网配置说明中的 [配置 > Outbounds > OutboundObject](https://www.v2fly.org/chapter_02/outbounds.html#outboundobject) 部分进行补全
+- `outbounds` 里的第一个大括号内的配置，即为 V2Ray 代理服务的配置。请根据自身需求进行修改，并参照 V2Ray 官网配置文档中的 [配置 > Outbounds > OutboundObject](https://www.v2fly.org/config/outbounds.html#outboundobject) 部分进行补全
 
 ```json
 {
@@ -538,7 +448,6 @@ scoop install v2ray-rules-dat
 - [@PeterLowe/adservers](https://pgl.yoyo.org/adservers)
 - [@DanPollock/hosts](https://someonewhocares.org/hosts)
 - [@crazy-max/WindowsSpyBlocker](https://github.com/crazy-max/WindowsSpyBlocker)
-- [@kidonng/sushi](https://github.com/kidonng/sushi)
 
 ## 项目 Star 数增长趋势
 
